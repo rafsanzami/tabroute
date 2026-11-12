@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>TabRoute</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <div class="brand"><img id="logo" src="icons/icon32.png" alt="">TabRoute</div>
+    <label class="switch" title="Turn proxy on / off">
+      <input id="power" type="checkbox">
+      <span class="slider"></span>
+    </label>
+  </header>
+
+  <!-- Big status card -->
+  <div id="statusCard" class="status">
+    <div class="status-dot"></div>
+    <div class="status-text">
+      <div id="statusTitle" class="status-title"></div>
+      <div id="statusSub" class="status-sub"></div>
+    </div>
+    <button id="test" class="ghost small-btn">Test</button>
+  </div>
+
+  <div id="error" class="error" hidden>
+    <span id="errorMsg"></span>
+    <button id="clearError" class="link-light">Dismiss</button>
+  </div>
+
+  <!-- This tab -->
+  <div class="card tab-card">
+    <div class="tab-row">
+      <div class="tab-info">
+        <div class="label">This tab</div>
+        <div id="curHost" class="host"></div>
+      </div>
+      <span id="routeChip" class="chip"></span>
+    </div>
+    <button id="toggleTab" class="btn block" hidden></button>
+  </div>
+
+  <!-- Mode picker -->
+  <div class="label section-label">Send to Burp</div>
+  <div class="modes" id="modes">
+    <button class="mode" data-mode="all">
+      <span class="mode-name">All traffic</span>
+      <span class="mode-desc">Every tab, every site</span>
+    </button>
+    <button class="mode" data-mode="tabs">
+      <span class="mode-name">Selected tabs</span>
+      <span class="mode-desc">Only tabs you capture</span>
+    </button>
+    <button class="mode" data-mode="patterns">
+      <span class="mode-name">Domains</span>
+      <span class="mode-desc">Only matching hosts</span>
+    </button>
+    <button class="mode" data-mode="incognito">
+      <span class="mode-name">Incognito</span>
+      <span class="mode-desc">Only private windows</span>
+    </button>
+  </div>
+
+  <!-- Mode-specific panels -->
+  <div id="tabsPanel" class="panel" hidden>
+    <div class="panel-head">
+      <span class="label">Captured tabs</span>
+      <button id="releaseAll" class="link" hidden>Release all</button>
+    </div>
+    <div id="capturedList"></div>
+    <div id="noTabs" class="empty">No tabs yet. Open your target and press <b>Capture this tab</b> (or <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd>).</div>
+  </div>
+
+  <div id="patternsPanel" class="panel" hidden>
+    <div class="label">Domains <span class="muted">— one per line, <code>*.site.com</code> also matches <code>site.com</code></span></div>
+    <textarea id="patterns" rows="3" placeholder="*.target.com&#10;api.example.org"></textarea>
+    <button id="savePatterns" class="btn block">Save domains</button>
+  </div>
+
+  <div id="incogPanel" class="panel" hidden>
+    <div id="incogWarn" class="warn" hidden>
+      Turn on <b>Allow in Incognito</b> for TabRoute first.
+      <button id="openExt" class="link">Open settings</button>
+    </div>
+    <button id="openIncog" class="btn block">Open incognito window</button>
+  </div>
+
+  <!-- Settings -->
+  <details id="settings">
+    <summary>Settings</summary>
+    <div class="row">
+      <label class="grow">Burp host<input id="host" type="text"></label>
+      <label class="port">Port<input id="port" type="number" min="1" max="65535"></label>
+    </div>
+    <label>Never proxy <span class="muted">(all modes, one per line)</span>
+      <textarea id="bypass" rows="2" placeholder="<local>&#10;*.google.com"></textarea>
+    </label>
+    <label class="check"><input id="tagHeader" type="checkbox"> Tag captured tab requests with header</label>
+    <label>Header name<input id="headerName" type="text"></label>
+    <label class="check"><input id="reloadOnCapture" type="checkbox"> Reload tab when capture starts</label>
+    <div class="row">
+      <button id="save" class="btn">Save settings</button>
+      <span id="saved" class="muted small"></span>
+      <a id="cert" class="link small push" target="_blank">Download Burp CA cert</a>
+    </div>
+  </details>
+
+  <script src="popup.js"></script>
+</body>
+</html>
