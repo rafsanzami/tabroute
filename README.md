@@ -21,13 +21,13 @@
 
 ## Why
 
-Tools like FoxyProxy send **all** browser traffic to your proxy. While testing, that means your Burp history fills up with email, music, docs and every other tab you have open.
+Most proxy switchers send **all** browser traffic to your proxy. While testing, that means your Burp history fills up with email, music, docs and every other tab you have open.
 
 TabRoute lets you choose what goes to the proxy:
 
 | Mode | What goes to the proxy |
 |---|---|
-| **All traffic** | Everything (like FoxyProxy) |
+| **All traffic** | Everything |
 | **Selected tabs** | Only the tabs you capture |
 | **Domains** | Only hosts that match your patterns, e.g. `*.target.com` |
 | **Incognito** | Only incognito windows (strict isolation) |

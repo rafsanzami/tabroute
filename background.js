@@ -2,7 +2,7 @@
 //
 // Modes:
 //   off       – no proxy
-//   all       – every request goes to Burp (FoxyProxy style)
+//   all       – every request goes to Burp
 //   patterns  – only hosts matching your domain patterns go to Burp
 //   tabs      – only hosts seen in the tabs you picked go to Burp,
 //               and those tabs' requests get tagged with a header
